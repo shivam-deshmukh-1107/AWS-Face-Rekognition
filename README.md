@@ -97,11 +97,11 @@ $ aws s3 mb s3://bucket-name --region us-east-1
 ### Uploading Faces
 
 Upload images to the configured S3 bucket with metadata containing the person's name.
-The lambda function (putimages.py) is triggered automatically, generating face prints and storing them in DynamoDB.
+The lambda function (lambdafunction.py) is triggered automatically, generating face prints and storing them in DynamoDB.
 
 ### Recognizing Faces
 
-The Lambda Function (lambdafunction.py) analyzes the images, creates their corresponding Face prints, and attempts to match the face print against the database. 
+The Lambda Function (testing.py) analyzes the images, creates their corresponding Face prints, and attempts to match the face print against the database. 
 If a match is found, return the person's name; otherwise, return "Person not detected."
 
 ## License
