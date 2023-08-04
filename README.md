@@ -12,10 +12,10 @@ An efficient Face Recognition Service built using AWS services. Upload images to
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
+  - [Commands](#commands)
 - [Usage](#usage)
   - [Uploading Faces](#uploading-faces)
   - [Recognizing Faces](#recognizing-faces)
-- [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -54,4 +54,58 @@ Clone the repository and install the required dependencies.
 $ git clone https://github.com/your-username/s3-face-recognition.git
 $ cd s3-face-recognition
 $ pip install -r requirements.txt
+```
 
+### Configuration
+Set up an S3 bucket in your AWS account to store face images.
+Create a DynamoDB table to store face prints and metadata.
+Configure your AWS credentials using aws configure.
+
+### Commands
+
+Install aws-shell
+```bash
+$ pip install aws-shell
+```
+
+Configure
+```bash
+$ aws configure
+```
+
+
+Create a collection on aws rekognition
+```bash
+$ aws rekognition create-collection --collection-id facerecognition_collection --region us-east-1
+```
+
+
+Create a table on DynamoDB
+```bash
+$ aws dynamodb create-table --table-name facerecognition --attribute-definitions AttributeName=RekognitionId,AttributeType=S
+  --key-schema AttributeName=RekognitionId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 --region us-east-1
+
+```
+
+Create S3 bucket
+```bash
+$ aws s3 mb s3://bucket-name --region us-east-1
+```
+
+## Usage
+
+### Uploading Faces
+
+Upload images to the configured S3 bucket with metadata containing the person's name.
+The lambda function (putimages.py) is triggered automatically, generating face prints and storing them in DynamoDB.
+
+### Recognizing Faces
+
+The Lambda Function (lambdafunction.py) analyzes the images, creates their corresponding Face prints, and attempts to match the face print against the database. 
+If a match is found, return the person's name; otherwise, return "Person not detected."
+
+## License
+This project is licensed under the MIT License.
+
+## Acknowledgments
+Feel free to customize this template with your specific Lambda function names and AWS configurations. Good luck with your Face Recognition Service!
