@@ -6,7 +6,7 @@ An efficient Face Recognition Service built using AWS services. Upload images to
 
 - [Introduction](#introduction)
 - [Features](#features)
-- - [Face Upload and Processing](#face-upload-and-processing)
+  - [Face Upload and Processing](#face-upload-and-processing)
   - [Face Recognition](#face-recognition)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
